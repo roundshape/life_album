@@ -51,5 +51,6 @@ test:
 production:
   <<: *default
   database: life_album_production
-  username: life_album
-  password: <%= ENV["LIFE_ALBUM_DATABASE_PASSWORD"] %>
+  username: root
+  password: <%= ENV["DATABASE_PASSWORD"] %>
+  socket: /var/lib/mysql/mysql.socket
