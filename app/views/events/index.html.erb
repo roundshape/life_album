@@ -1,0 +1,81 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'events', media: 'all' %>
+<% end %>
+
+
+<div class="container">
+  <div class="calendar-container">
+    <!-- ここにカレンダーのテーブルが来ます -->
+    <%= month_calendar do |date| %>
+      <div class="day-content">
+        <span class="date-number"><%= date.day %></span>
+        <div class="event-info">
+        <% day_events = @events.select { |event| (event.start_date.to_date..event.end_date.to_date).cover?(date) } %>
+        <% if day_events.any? %>
+          <!-- <i class="fas fa-calendar event-icon" data-date="<%= date %>"></i> -->
+          <i class="fas fa-camera-retro event-icon" data-date="<%= date %>"></i>
+          <% if day_events.count > 1 %>
+            <span class="event-count"><%= day_events.count %></span> <!-- その日のイベント数 -->
+          <% end %>
+        <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- ここにイベント一覧が来ます -->
+  <div class="list-container">
+    <button type="submit" id="openModal">登録</button>
+    <div class="title">クリックした日付</div>
+    <!-- ここにulタグの一覧が来ます -->
+    <ul>
+      <!-- その他のリストアイテム -->
+    </ul>
+  </div>
+</div>
+
+<!-- 地図表示 -->
+<div id="map" style="height: 300px; width: 700px;"></div>
+
+
+<!-- モーダルダイアログ -->
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close-button">×</span>
+    <h3>予定の登録</h3>
+    <form id="eventForm" action="<%= events_path %>" method="post" enctype="multipart/form-data">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="form-group">
+        <label for="eventName">イベント名：</label>
+        <input type="text" id="eventName" name="event[name]">
+      </div>
+      <div class="form-group">
+        <label for="eventStartDate">開始日時：</label>
+        <input type="datetime-local" id="eventStartDate" name="event[start_date]">
+      </div>
+      <div class="form-group">
+        <label for="eventEndDate">終了日時：</label>
+        <input type="datetime-local" id="eventEndDate" name="event[end_date]">
+      </div>
+      <div class="form-group">
+        <label for="imageUpload">画像参照：</label>
+        <input type="file" id="imageUpload" name="photo[image]">
+      </div>
+      <button type="submit" id="registerModal">登録</button>
+      <button type="button" id="closeModal">閉じる</button>
+    </form>
+  </div>
+</div>
+
+
+<%= javascript_include_tag "register_event" %>
+<%= javascript_include_tag "event_dialog" %>
+
+
+
+<script defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&loading=async&callback=initMap">
+</script>
+
+<%= javascript_include_tag "calendar_click" %>
+<%= javascript_include_tag "map" %>

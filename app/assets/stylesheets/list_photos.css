@@ -1,0 +1,59 @@
+.image-container {
+  display: flex; /* Flexboxを使用して画像を横並びにする */
+  overflow-x: auto; /* 水平方向のスクロールバーを表示 */
+  white-space: nowrap; /* 画像が折り返されないようにする */
+}
+
+.image-box {
+  border: 1px solid black; /* 枠線を追加 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden; /* 枠外の画像を隠す */
+  width: 256px; /* 固定幅を設定 */
+  height: 256px; /* 高さも固定 (必要に応じて) */
+  flex-shrink: 0; /* このアイテムが縮小されないようにする */
+  margin-right: 8px; /* 画像間のスペース (オプション) */
+}
+
+.image-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* アスペクト比を保ちながら全体を表示 */
+}
+
+/* 選択画像ハイライト表示用のスタイル */
+.highlight {
+  border-color: red; /* ハイライト色を赤にする */
+  border-width: 2px; /* 枠線の幅を太くする */
+  background-color: lightblue; /* 背景色を薄い水色にする */
+}
+
+.radio-buttons form {
+  margin-top: 20px; /* 画像一覧との間隔 */
+  display: flex; /* Flexboxを使用してアイテムを横並びにする */
+  justify-content: center; /* 中央寄せ */
+}
+
+.radio-buttons label {
+  margin-right: 20px; /* 最後のラベル以外、右側にスペースを追加 */
+}
+
+.radio-buttons input[type="radio"] {
+  margin-right: 5px; /* ラジオボタンとラベルの間に少しスペースを追加 */
+}
+
+#photo-details {
+  margin-left: auto;
+  margin-right: auto;
+  display: none; /* 最初は非表示 */
+}
+
+.fit-image {
+  width: 512px; /* コンテナの幅を設定 */
+  height: 512px; /* コンテナの高さを設定 */
+  object-fit: contain; /* 元のアスペクト比を保ちながら、コンテナ内に画像全体が収まるようにする */
+  object-position: center; /* 画像をコンテナの中央に配置 */
+  display: block; /* ブロックレベル要素として表示（必要に応じて） */
+  margin: auto; /* コンテナ内で中央揃えにする */
+}
