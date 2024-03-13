@@ -2,7 +2,7 @@
 lock '3.18.1'
 
 # Capistranoのログの表示に利用する
-set :application, 'LifeAlbum'
+set :application, 'life_album'
 
 # どのリポジトリからアプリをpullするかを指定する
 set :repo_url,  'git@github.com:roundshape/life_album.git'
