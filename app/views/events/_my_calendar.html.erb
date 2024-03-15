@@ -1,0 +1,14 @@
+<%= month_calendar(start_date: @month, next_month: @next_month, previous_month: @previous_month) do |date| %>
+  <div class="day-content">
+    <span class="date-number"><%= date.day %></span>
+    <div class="event-info">
+    <% day_events = @events.select { |event| (event.start_date.to_date..event.end_date.to_date).cover?(date) } %>
+    <% if day_events.any? %>
+      <i class="fas fa-camera-retro event-icon" data-date="<%= date %>"></i>
+      <% if day_events.count > 1 %>
+        <span class="event-count"><%= day_events.count %></span> <!-- その日のイベント数 -->
+      <% end %>
+    <% end %>
+    </div>
+  </div>
+<% end %>

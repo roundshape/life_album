@@ -1,11 +1,37 @@
 class EventsController < ApplicationController
   def index
-    # 開始日と終了日の範囲を設定
-    start_date = Date.today.beginning_of_month
-    end_date = Date.today.end_of_month
+    @month = params[:month] ? Date.parse(params[:month]) : Date.today
+    @previous_month = @month.prev_month
+    @next_month = @month.next_month
 
-    # 指定された日付範囲に開始または終了するイベントを取得
-    @events = Event.where('start_date <= ? AND end_date >= ?', end_date, start_date)
+    @events = fetch_events_for_month(@month) #@eventsを_my_calendar.htm.erbへ
+  end
+
+  def nav_month
+    # パラメータから月を取得して適切なデータをフェッチする
+    month_param = params[:month].gsub(/\A"|"\Z/, '')
+    @month = Date.parse(month_param)
+    @previous_month = @month.prev_month
+    @next_month = @month.next_month
+
+    @events = fetch_events_for_month(@month) #@eventsを_my_calendar.htm.erbへ
+
+    # カレンダーのHTMLをレンダリング
+    calendar_html = render_to_string(partial: 'my_calendar',
+                                      locals: { month: @month },
+                                      layout: false)
+
+    respond_to do |format|
+      format.json {
+        render json: {
+          calendarHtml: calendar_html,
+          nextMonth: @next_month.strftime('%Y-%m-01'),
+          previousMonth: @previous_month.strftime('%Y-%m-01'),
+          currentYear: @month.year,
+          currentMonthName: t('date.month_names')[@month.month]
+        }
+      }
+    end
   end
 
   def date_events
@@ -147,5 +173,11 @@ class EventsController < ApplicationController
       value *= -1
     end
     return value.to_f
+  end
+
+  def fetch_events_for_month(month)
+    start_date = month.beginning_of_month
+    end_date = month.end_of_month
+    Event.where('start_date <= ? AND end_date >= ?', end_date, start_date)
   end
 end

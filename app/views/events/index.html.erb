@@ -5,22 +5,19 @@
 
 <div class="container">
   <div class="calendar-container">
-    <!-- ここにカレンダーのテーブルが来ます -->
-    <%= month_calendar do |date| %>
-      <div class="day-content">
-        <span class="date-number"><%= date.day %></span>
-        <div class="event-info">
-        <% day_events = @events.select { |event| (event.start_date.to_date..event.end_date.to_date).cover?(date) } %>
-        <% if day_events.any? %>
-          <!-- <i class="fas fa-calendar event-icon" data-date="<%= date %>"></i> -->
-          <i class="fas fa-camera-retro event-icon" data-date="<%= date %>"></i>
-          <% if day_events.count > 1 %>
-            <span class="event-count"><%= day_events.count %></span> <!-- その日のイベント数 -->
-          <% end %>
-        <% end %>
-        </div>
-      </div>
-    <% end %>
+    <div class="calendar-heading">
+      <time datetime="<%= @month.strftime('%Y-%m') %>" class="calendar-title"><%= t('date.month_names')[@month.month] %> <%= @month.year %></time>
+
+      <nav>
+        <%= link_to t('simple_calendar.previous', default: 'Previous'), "#", id: "previous-month", data: { month: @previous_month } %>
+        <%= link_to t('simple_calendar.today', default: 'Today'), "#", id: "today", data: { month: @month } %>
+        <%= link_to t('simple_calendar.next', default: 'Next'), "#", id: "next-month", data: { month: @next_month } %>
+      </nav>
+    </div>
+    
+    <div id="calendar">
+      <%= render 'my_calendar', locals: { month: @month } %>
+    </div>
   </div>
 
   <!-- ここにイベント一覧が来ます -->
@@ -77,5 +74,5 @@
     src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&loading=async&callback=initMap">
 </script>
 
-<%= javascript_include_tag "calendar_click" %>
+<%= javascript_include_tag "calendar" %>
 <%= javascript_include_tag "map" %>
