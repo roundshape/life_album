@@ -23,11 +23,6 @@ $(document).ready(function() {
         // 取得したイベントごとに<li>要素を作成し、リストに追加
         const li = document.createElement('li');
       
-        // イベント名を表示するためのspan要素を作成
-        const eventNameSpan = document.createElement('span');
-        eventNameSpan.textContent = event.name; // イベントの名前を設定
-        li.appendChild(eventNameSpan); // <li>要素にイベント名を追加
-      
         // 「写真」ボタンを作成
         const photoButton = document.createElement('button');
         photoButton.textContent = '写真';
@@ -48,7 +43,12 @@ $(document).ready(function() {
       
         // <li>要素に「写真」ボタンを追加
         li.appendChild(photoButton);
-      
+
+        // イベント名を表示するためのspan要素を作成
+        const eventNameSpan = document.createElement('span');
+        eventNameSpan.textContent = event.name; // イベントの名前を設定
+        li.appendChild(eventNameSpan); // <li>要素にイベント名を追加
+        
         // 緯度経度のデータ属性を追加
         li.setAttribute('data-latitude', event.latitude);
         li.setAttribute('data-longitude', event.longitude);

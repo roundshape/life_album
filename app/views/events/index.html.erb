@@ -2,37 +2,43 @@
   <%= stylesheet_link_tag 'events', media: 'all' %>
 <% end %>
 
+<%= render "shared/header" %>
 
 <div class="container">
-  <div class="calendar-container">
-    <div class="calendar-heading">
-      <time datetime="<%= @month.strftime('%Y-%m') %>" class="calendar-title"><%= t('date.month_names')[@month.month] %> <%= @month.year %></time>
+  <div class="upper-container">
+    <div class="calendar-container">
+      <div class="calendar-heading">
+        <time datetime="<%= @month.strftime('%Y-%m') %>" class="calendar-title"><%= t('date.month_names')[@month.month] %> <%= @month.year %></time>
 
-      <nav>
-        <%= link_to t('simple_calendar.previous', default: 'Previous'), "#", id: "previous-month", data: { month: @previous_month } %>
-        <%= link_to t('simple_calendar.today', default: 'Today'), "#", id: "today", data: { month: @month } %>
-        <%= link_to t('simple_calendar.next', default: 'Next'), "#", id: "next-month", data: { month: @next_month } %>
-      </nav>
+        <nav>
+          <%= link_to t('simple_calendar.previous', default: 'Previous'), "#", id: "previous-month", data: { month: @previous_month } %>
+          <%= link_to t('simple_calendar.today', default: 'Today'), "#", id: "today", data: { month: @month } %>
+          <%= link_to t('simple_calendar.next', default: 'Next'), "#", id: "next-month", data: { month: @next_month } %>
+        </nav>
+      </div>
+      
+      <div id="calendar">
+        <%= render 'my_calendar', locals: { month: @month } %>
+      </div>
     </div>
-    
-    <div id="calendar">
-      <%= render 'my_calendar', locals: { month: @month } %>
+
+    <!-- ここにイベント一覧が来ます -->
+    <div class="list-container">
+      <div class="list-title">
+        <button type="submit" id="openModal">登録</button>
+        <div class="title">クリックした日付</div>
+      </div>
+      <hr>
+      <!-- ここにから一覧が来ます -->
+      <ul>
+        <!-- liアイテム -->
+      </ul>
     </div>
   </div>
 
-  <!-- ここにイベント一覧が来ます -->
-  <div class="list-container">
-    <button type="submit" id="openModal">登録</button>
-    <div class="title">クリックした日付</div>
-    <!-- ここにulタグの一覧が来ます -->
-    <ul>
-      <!-- その他のリストアイテム -->
-    </ul>
-  </div>
+  <!-- 地図表示 -->
+  <div id="map"></div>
 </div>
-
-<!-- 地図表示 -->
-<div id="map" style="height: 300px; width: 700px;"></div>
 
 
 <!-- モーダルダイアログ -->

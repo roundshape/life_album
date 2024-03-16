@@ -1,9 +1,28 @@
 .container {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.upper-container {
+  display: flex;
+  background-color: white;
 }
 
 .calendar-container {
-  width: 500px; /* calendar-containerの幅を500pxに設定 */
+  width: 550px; /* calendar-containerの幅を500pxに設定 */
+  background-color: rgb(206, 237, 206);
+}
+
+.calendar-heading {
+  display: flex; /* Flexboxレイアウトを有効化 */
+  justify-content: center; /* 子要素を水平方向の中央に配置 */
+  align-items: center; /* 子要素を垂直方向の中央に配置 */
+}
+
+.calendar-heading time {
+  margin-right: 20px; /* <time>タグと<nav>タグの間に20pxのスペースを追加 */
 }
 
 .calendar-container .day-content {
@@ -26,17 +45,24 @@
   /* イベント数表示のスタイル */
 }
 
-.list-container {
-  width: 250px; /* list-containerの幅を250pxに設定 */
-  border: 2px solid #000; /* 黒の四角い枠線を設定 */
-  padding: 10px; /* 内側の余白を設定 */
-  margin: 10px 0 10px 10px; /* 上と下に10px、左に10pxのマージンを設定 */
+.simple-calendar .day {
+  height: 60px !important;
 }
 
-.list-container .title {
-  border-bottom: 3px solid #ccc; /* タイトルの下に薄いグレーの罫線を追加 */
-  padding-bottom: 10px; /* 罫線とテキストの間に少し余白を追加 */
-  margin-bottom: 10px; /* 罫線の下のコンテンツとの間に余白を追加 */
+/* ===========イベント一覧関係 ========== */
+.list-container {
+  width: 400px; /* list-containerの幅を250pxに設定 */
+  border: 2px solid #000; /* 黒の四角い枠線を設定 */
+  padding: 10px; /* 内側の余白を設定 */
+  margin-left: 10px;
+}
+
+.list-title {
+  display: flex;
+}
+
+.selected-day {
+  margin-left: 10px;
 }
 
 .list-container ul {
@@ -47,11 +73,21 @@
 .list-container ul li {
   border-bottom: 1px solid #ccc; /* 各リストアイテムの下に薄いグレーの罫線を設定 */
   padding: 8px 0; /* リストアイテムの上下にパディングを設定 */
+  text-align: left;
 }
 
 .list-container ul li:last-child {
   border-bottom: none; /* 最後のリストアイテムの下線を消去 */
 }
+
+
+/* ===========地図関係 ========== */
+#map {
+  height: calc(100vh - 500px);
+  width: calc(550px + 400px + 20px);
+  margin-top: 10px;
+}
+
 
 /* ===========ダイヤログ関係 ========== */
 h3 {
