@@ -1,29 +1,43 @@
-  <div class="image-container" data-event-id="<%= @event.id %>">
-    <% @photos.each do |photo| %>
-      <div class="image-box" data-photo-id="<%= photo.id %>">
-        <img src="<%= photo.thumbnail %>">
-      </div>
-    <% end %>
-  </div>
-  <div class="radio-buttons">
-    <form>
-      <input type="radio" id="map" name="selection" value="map">
-      <label for="map">地図</label><br>
-      <input type="radio" id="photo" name="selection" value="photo" checked>
-      <label for="photo">写真</label>
-    </form>
-  </div>
+<%= render "shared/header" %>
+<div class="center-container">
+  <div class="container">
+    <div class="image-container" data-event-id="<%= @event.id %>">
+      <% @photos.each do |photo| %>
+        <div class="image-box" data-photo-id="<%= photo.id %>">
+          <img src="<%= photo.thumbnail %>">
+        </div>
+      <% end %>
+    </div>
+    <div class="radio-buttons">
+      <form>
+        <input type="radio" id="map_radio" name="selection" value="map">
+        <label for="map">地図</label><br>
+        <input type="radio" id="photo_radio" name="selection" value="photo" checked>
+        <label for="photo">写真</label>
+      </form>
+    </div>
 
-  <!-- 選択された写真の詳細表示領域 -->
-  <table id="photo-details" style="display: none;">
-    <tr>
-      <td width="512px" height="512px">
-        <img id="selected-photo" src="" alt="Selected photo" class="fit-image">
-      </td>
-      <td width="10px"></td>
-      <td>
-        <p id="photo-exif"></p>
-      </td>
-    </tr>
+    <div id="switch-display">
+      <!-- 選択された写真の詳細表示領域 -->
+      <table id="photo-details">
+        <tr>
+          <td>
+            <div class="selected-image-box">
+              <img id="selected-photo" src="" alt="Selected photo" class="fit-image">
+            </div>
+          </td>
+          <td>
+            <div class="photo-details-mid-spacer"></div>
+          </td>
+          <td>
+            <div class="photo-exif-box">
+              <p id="photo-exif"></p>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
   </div>
+</div>
+
 <%= javascript_include_tag "list_photos" %>

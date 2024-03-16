@@ -1,5 +1,4 @@
 const setupPhotoSelectionHandlers = function() {
-console.log('setupPhotoSelectionHandlers');
   // 選択された写真の詳細を表示するイベントハンドラを統合
   document.querySelectorAll('.image-box').forEach(function(box) {
     box.addEventListener('click', function() {
@@ -36,7 +35,7 @@ console.log('setupPhotoSelectionHandlers');
   });
 
   // ラジオボタン選択時のイベントハンドラ（写真）
-  document.getElementById('photo').addEventListener('change', function() {
+  document.getElementById('photo_radio').addEventListener('change', function() {
     if(this.checked) {
       // ここに写真選択時のロジックを追加
     }

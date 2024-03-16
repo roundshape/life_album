@@ -1,7 +1,19 @@
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* min-height: 100vh; */
+}
+
+/* .container {
+  margin: 0;
+} */
+
 .image-container {
   display: flex; /* Flexboxを使用して画像を横並びにする */
   overflow-x: auto; /* 水平方向のスクロールバーを表示 */
   white-space: nowrap; /* 画像が折り返されないようにする */
+  width: 900px;
 }
 
 .image-box {
@@ -46,7 +58,13 @@
 #photo-details {
   margin-left: auto;
   margin-right: auto;
-  display: none; /* 最初は非表示 */
+  display: block; /* 最初は非表示 */
+}
+
+.selected-image-box {
+  width: 513px;
+  height: 513px;
+  border: 1px solid black;
 }
 
 .fit-image {
@@ -54,6 +72,17 @@
   height: 512px; /* コンテナの高さを設定 */
   object-fit: contain; /* 元のアスペクト比を保ちながら、コンテナ内に画像全体が収まるようにする */
   object-position: center; /* 画像をコンテナの中央に配置 */
-  display: block; /* ブロックレベル要素として表示（必要に応じて） */
   margin: auto; /* コンテナ内で中央揃えにする */
+  margin: auto;
+}
+
+.photo-details-mid-spacer {
+  width: 20px;
+}
+
+.photo-exif-box {
+  height: 513px;
+  width: 350px;
+  border: 1px solid black;
+  text-align: left;
 }
