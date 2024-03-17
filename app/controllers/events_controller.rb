@@ -10,7 +10,15 @@ class EventsController < ApplicationController
   def nav_month
     # パラメータから月を取得して適切なデータをフェッチする
     month_param = params[:month].gsub(/\A"|"\Z/, '')
-    @month = Date.parse(month_param)
+    # params[:month]がYYYY-MM-DD形式かどうかをチェック
+    if month_param.match?(/\A\d{4}-\d{2}-\d{2}\Z/)
+      # YYYY-MM-DD形式の場合はそのままDate.parseを使用
+      @month = Date.parse(month_param)
+    else #YYYY-MM形式の場合は-01を追加してDate.parseを使用
+      @month = Date.parse(month_param + "-01")
+    end
+
+    # @month = Date.parse(month_param)
     @previous_month = @month.prev_month
     @next_month = @month.next_month
 
@@ -20,7 +28,6 @@ class EventsController < ApplicationController
     calendar_html = render_to_string(partial: 'my_calendar',
                                       locals: { month: @month },
                                       layout: false)
-
     respond_to do |format|
       format.json {
         render json: {
@@ -176,8 +183,8 @@ class EventsController < ApplicationController
   end
 
   def fetch_events_for_month(month)
-    start_date = month.beginning_of_month
-    end_date = month.end_of_month
+    start_date = month.beginning_of_month.beginning_of_day
+    end_date = month.end_of_month.end_of_day
     Event.where('start_date <= ? AND end_date >= ?', end_date, start_date)
   end
 end

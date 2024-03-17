@@ -5,7 +5,8 @@ const event_dialog_click = function() {
 
   if (form) {
     form.addEventListener('submit', function(e) {
-      e.preventDefault();
+      // event.preventDefault(); の呼び出しを条件付きにする
+      if (e) e.preventDefault();
       const formData = new FormData(this);
       fetch(this.action, {
         method: 'POST',
@@ -26,6 +27,13 @@ const event_dialog_click = function() {
           modal.style.display = 'none';
           // 任意: ページに成功メッセージを表示
           alert('イベントが正常に登録されました。');
+
+          // カレンダーの更新
+          // 現在のカレンダー月を取得してupdateCalendarを呼び出す
+          const currentMonth = document.querySelector('.calendar-heading > time').getAttribute('datetime');
+          // updateCalendarForCurrentMonth はもはや必要ありません。代わりに updateCalendar を直接使用します。
+          // ここで event と direction を省略または null を渡します。
+          updateCalendar(null, null, currentMonth);
         } else if (data.status === 'error') {
           // エラーメッセージを表示
           alert(`エラー: ${data.errors.join(', ')}`);
