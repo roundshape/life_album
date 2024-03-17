@@ -55,7 +55,11 @@ $(document).ready(function() {
       
         // <li>要素にクリックイベントリスナーを設定（地図上に場所を表示）
         li.addEventListener('click', function() {
-          displayLocationOnMap(event.latitude, event.longitude);
+          if (event.latitude && event.longitude) {
+            displayLocationOnMap(event.latitude, event.longitude);
+          } else {
+            alert('位置情報が登録されていません');
+          }
         });
       
         // <li>要素をリストコンテナに追加
@@ -71,7 +75,7 @@ $(document).ready(function() {
 function displayLocationOnMap(latitude, longitude) {
   const eventLocation = new google.maps.LatLng(latitude, longitude);
   window.map.setCenter(eventLocation);
-  window.map.setZoom(17); // ズームレベルを調整してイベントの場所がよく見えるようにする
+  // window.map.setZoom(17);
 
   // イベントの場所に新しいマーカーを設置
   const marker = new google.maps.Marker({

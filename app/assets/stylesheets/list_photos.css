@@ -62,14 +62,14 @@
 }
 
 .selected-image-box {
-  width: 513px;
-  height: 513px;
+  width: 501px;
+  height: 501px;
   border: 1px solid black;
 }
 
 .fit-image {
-  width: 512px; /* コンテナの幅を設定 */
-  height: 512px; /* コンテナの高さを設定 */
+  width: 500px; /* コンテナの幅を設定 */
+  height: 500px; /* コンテナの高さを設定 */
   object-fit: contain; /* 元のアスペクト比を保ちながら、コンテナ内に画像全体が収まるようにする */
   object-position: center; /* 画像をコンテナの中央に配置 */
   margin: auto; /* コンテナ内で中央揃えにする */
@@ -81,8 +81,14 @@
 }
 
 .photo-exif-box {
-  height: 513px;
+  height: 501px;
   width: 350px;
   border: 1px solid black;
   text-align: left;
+}
+
+#map {
+  height: calc(100vh - 370px);
+  width: calc(512px + 350px + 20px);
+  margin: 0;
 }

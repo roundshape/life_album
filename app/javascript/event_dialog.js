@@ -1,18 +1,7 @@
 const event_dialog_click = function() {
   const modal = document.getElementById('modal');
-  // const openModalBtn = document.getElementById('openModal');
-  // const closeModalBtn = document.getElementsByClassName('close-button')[0];
+
   const form = document.getElementById('eventForm');
-
-  // モーダルを開く
-  // openModalBtn.addEventListener('click', function() {
-  //   modal.style.display = 'block';
-  // });
-
-  // モーダルを閉じる
-  // closeModalBtn.addEventListener('click', function() {
-  //   modal.style.display = 'none';
-  // });
 
   if (form) {
     form.addEventListener('submit', function(e) {

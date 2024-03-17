@@ -17,9 +17,10 @@ class ListPhotosController < ApplicationController
       date_time: photo.date_time,
       lens_make: photo.lens_make,
       lens_model: photo.lens_model,
-      focal_length: photo.focal_length
+      focal_length: photo.focal_length,
+      longitude: photo.longitude,
+      latitude: photo.latitude
     }
-
     render json: { image_url: image_url, exif_json: exif_json }
   end
 end

@@ -11,33 +11,42 @@
     <div class="radio-buttons">
       <form>
         <input type="radio" id="map_radio" name="selection" value="map">
-        <label for="map">地図</label><br>
+        <label for="map_radio">地図</label><br>
         <input type="radio" id="photo_radio" name="selection" value="photo" checked>
-        <label for="photo">写真</label>
+        <label for="photo_radio">写真</label>
       </form>
     </div>
 
     <div id="switch-display">
+      <!-- 地図表示 -->
+      <div id="map"></div>
       <!-- 選択された写真の詳細表示領域 -->
-      <table id="photo-details">
-        <tr>
-          <td>
-            <div class="selected-image-box">
-              <img id="selected-photo" src="" alt="Selected photo" class="fit-image">
-            </div>
-          </td>
-          <td>
-            <div class="photo-details-mid-spacer"></div>
-          </td>
-          <td>
-            <div class="photo-exif-box">
-              <p id="photo-exif"></p>
-            </div>
-          </td>
-        </tr>
-      </table>
+      <div id="photo">
+        <table id="photo-details">
+          <tr>
+            <td>
+              <div class="selected-image-box">
+                <img id="selected-photo" src="" alt="Selected photo" class="fit-image">
+              </div>
+            </td>
+            <td>
+              <div class="photo-details-mid-spacer"></div>
+            </td>
+            <td>
+              <div class="photo-exif-box">
+                <p id="photo-exif"></p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
     </div>
   </div>
 </div>
 
+<script defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&loading=async&callback=initMap">
+</script>
+
 <%= javascript_include_tag "list_photos" %>
+<%= javascript_include_tag "map" %>
