@@ -1,7 +1,7 @@
 const setupPhotoSelectionHandlers = function() {
   // 選択された写真の詳細を表示するイベントハンドラを統合
   document.querySelectorAll('.image-box').forEach(function(box) {
-    box.addEventListener('click', function() {
+    box.addEventListener('click', async function() {
       // 既に選択されている要素があればハイライトを解除
       const currentHighlight = document.querySelector('.highlight');
       if (currentHighlight) {
@@ -14,9 +14,10 @@ const setupPhotoSelectionHandlers = function() {
       let locationFound = false;
       const eventId = document.querySelector('.image-container').getAttribute('data-event-id');
       const photoId = this.getAttribute('data-photo-id');
-      fetch(`/events/${eventId}/list_photos/${photoId}/details`) // Railsのルーティングに合わせて調整
-        .then(response => response.json())
-        .then(data => {
+
+      try {
+        const response = await fetch(`/events/${eventId}/list_photos/${photoId}/details`);
+        const data = await response.json(); // JSONの解析
           document.getElementById('selected-photo').src = data.image_url;
 
           // 写真の地図上の位置を表示
@@ -55,7 +56,10 @@ const setupPhotoSelectionHandlers = function() {
             // 地図の中心を写真の位置に移動
             window.map.setCenter(photoLocation);
           }
-        });
+        } catch (error) {
+          console.error('Error fetching photo details:', error);
+        }
+  
         if (!locationFound) {
           alert('位置情報がありません');
         }  
