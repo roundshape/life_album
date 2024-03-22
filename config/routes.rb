@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     resources :list_photos, only: [:index] do
       get :details, on: :member
       post :drop, on: :collection
+      get :reload_image_container, on: :collection
     end
   end
-  
 end

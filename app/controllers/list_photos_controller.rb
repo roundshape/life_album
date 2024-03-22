@@ -94,7 +94,16 @@ class ListPhotosController < ApplicationController
       # バリデーションエラーがあった場合
       render json: { status: 'error', errors: photo.errors.full_messages }, status: :unprocessable_entity
     end
+  end
 
+  def reload_image_container
+    @event = Event.find(params[:event_id])
+    html = ''
+    @event.photos.each do |photo|
+      html += "<div class=\"image-box\" data-photo-id=\"#{photo.id}\">" +
+              "<img src=\"#{photo.thumbnail}\"></div>"
+    end
+    render json: { status: 'success', html: html }, status: :ok
   end
 
   private

@@ -13,13 +13,13 @@
         </div>
       <% end %>
     </div>
-    <div class="radio-buttons">
-      <form>
-        <input type="radio" id="map_radio" name="selection" value="map">
-        <label for="map_radio">地図</label><br>
-        <input type="radio" id="photo_radio" name="selection" value="photo" checked>
-        <label for="photo_radio">写真</label>
-      </form>
+    <div class="operations">
+      <input type="radio" id="map_radio" name="selection" value="map">
+      <label for="map_radio">地図</label><br>
+      <input type="radio" id="photo_radio" name="selection" value="photo" checked>
+      <label for="photo_radio">写真</label>
+      <button id="reload-ImageContainer" data-reload-url="<%= reload_image_container_event_list_photos_path(event_id: @event.id) %>">再描</button>
+      <button id="cancelUpload">アップロード停止</button>
     </div>
 
     <div id="switch-display">

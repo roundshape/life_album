@@ -1,6 +1,9 @@
 // Dropzoneの自動発見を無効化
 Dropzone.autoDiscover = false;
 
+// dropzone変数をより広いスコープで定義
+let dropzone;
+
 const upload = function() {
   const dropzoneElement = document.getElementById('myDropzone');
   const dropzoneUrl = dropzoneElement.getAttribute('data-dropzone-url');
@@ -16,6 +19,18 @@ const upload = function() {
       dictDefaultMessage: "", // デフォルトメッセージを非表示にする
       clickable: false, // ドロップエリアクリックでのダイアログ表示を停止
       init: function() {
+        this.on("addedfile", function(file) {
+          // 最初のファイルが追加されたときに右端へスクロール
+          if (this.files.length === 1) {
+            scrollToRight(dropzoneElement);
+          }
+        });
+  
+        this.on("queuecomplete", function() {
+          // 全てのファイルのアップロードが完了したときに右端へスクロール
+          scrollToRight(dropzoneElement);
+        });
+
         this.on("complete", function(file) {
           // ファイルアップロードが完了した後の処理
           var fileInfoElement = document.createElement("div");
@@ -28,6 +43,23 @@ const upload = function() {
       }
     }
   );
+
+  // 停止ボタンのクリックイベントを設定
+  document.getElementById('cancelUpload').addEventListener('click', function() {
+    cancelUploads(dropzone);
+  });
 };
+
+// 未アップロードのファイルをキャンセルする関数
+function cancelUploads(dropzone) {
+  dropzone.getQueuedFiles().forEach(file => {
+    dropzone.removeFile(file);
+  });
+};
+
+// 要素を右端にスクロールする関数
+function scrollToRight(element) {
+  element.scrollLeft = element.scrollWidth;
+}
 
 document.addEventListener("turbo:load", upload);

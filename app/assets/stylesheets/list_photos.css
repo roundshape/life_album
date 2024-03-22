@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* min-height: 100vh; */
 }
 
 /* .container {
@@ -13,6 +12,7 @@
   display: flex; /* Flexboxを使用して画像を横並びにする */
   overflow-x: auto; /* 水平方向のスクロールバーを表示 */
   white-space: nowrap; /* 画像が折り返されないようにする */
+  height: 300px;
   width: 900px;
   border: 1px solid black;
 }
@@ -48,17 +48,18 @@
   background-color: lightblue; /* 背景色を薄い水色にする */
 }
 
-.radio-buttons form {
-  margin-top: 20px; /* 画像一覧との間隔 */
+.operations {
+  margin-top: 5px; /* 画像一覧との間隔 */
+  margin-bottom: 5px; /* 画像情報との間隔 */
   display: flex; /* Flexboxを使用してアイテムを横並びにする */
   justify-content: center; /* 中央寄せ */
 }
 
-.radio-buttons label {
+.operations label {
   margin-right: 20px; /* 最後のラベル以外、右側にスペースを追加 */
 }
 
-.radio-buttons input[type="radio"] {
+.operations input[type="radio"] {
   margin-right: 5px; /* ラジオボタンとラベルの間に少しスペースを追加 */
 }
 
@@ -95,7 +96,7 @@
 }
 
 #map {
-  height: calc(100vh - 370px);
+  height: calc(100vh - 450px);
   width: calc(512px + 350px + 20px);
   margin: 0;
 }
