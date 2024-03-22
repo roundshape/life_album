@@ -14,6 +14,7 @@
   overflow-x: auto; /* 水平方向のスクロールバーを表示 */
   white-space: nowrap; /* 画像が折り返されないようにする */
   width: 900px;
+  border: 1px solid black;
 }
 
 .image-box {
@@ -33,6 +34,12 @@
   max-height: 100%;
   object-fit: contain; /* アスペクト比を保ちながら全体を表示 */
 }
+
+/* Dropzoneの指定 */
+.dropzone .dz-preview .dz-image {
+  border-radius: 0 !important;
+}
+
 
 /* 選択画像ハイライト表示用のスタイル */
 .highlight {

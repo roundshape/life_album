@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get :date_events, on: :collection
     resources :list_photos, only: [:index] do
       get :details, on: :member
+      post :drop, on: :collection
     end
   end
   
