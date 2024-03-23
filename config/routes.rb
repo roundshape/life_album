@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       get :details, on: :member
       post :drop, on: :collection
       get :reload_image_container, on: :collection
+      get :display_locations, on: :collection
     end
   end
 end

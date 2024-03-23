@@ -106,6 +106,19 @@ class ListPhotosController < ApplicationController
     render json: { status: 'success', html: html }, status: :ok
   end
 
+  def display_locations
+    # パラメータからイベントIDを取得
+    event_id = params[:event_id]
+
+    # イベントIDに紐づく写真の位置情報を取得
+    # ここではPhotoモデルがイベントと写真を紐づけていると仮定します
+    # 実際のモデル名や関連名に合わせて適宜調整してください
+    photos = Photo.where(event_id: event_id).select(:id, :latitude, :longitude)
+
+    # 位置情報をJSON形式でレスポンスとして返す
+    render json: photos
+  end
+
   private
 
   # ストロングパラメータの定義
