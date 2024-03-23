@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  include CommonMethods
+  
   def index
     @month = params[:month] ? Date.parse(params[:month]) : Date.today
     @previous_month = @month.prev_month
