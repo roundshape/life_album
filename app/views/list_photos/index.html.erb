@@ -6,6 +6,7 @@
 
 <div class="center-container">
   <div class="container">
+    <div class="event_name"><%= @event.name %>(<%= @event.start_date.strftime('%Y/%m/%d') %>ー<%= @event.end_date.strftime('%Y/%m/%d') %>)</div>
     <div id="myDropzone" class="image-container dropzone" data-event-id="<%= @event.id %>" data-dropzone-url="<%= drop_event_list_photos_path(event_id: @event.id) %>">
       <% @photos.each do |photo| %>
         <div class="image-box" data-photo-id="<%= photo.id %>">

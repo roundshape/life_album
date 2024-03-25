@@ -42,38 +42,10 @@
 
 
 <!-- モーダルダイアログ -->
-<div id="modal" class="modal">
-  <div class="modal-content">
-    <span class="close-button">×</span>
-    <h3>予定の登録</h3>
-    <form id="eventForm" action="<%= events_path %>" method="post" enctype="multipart/form-data">
-      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-      <div class="form-group">
-        <label for="eventName">イベント名：</label>
-        <input type="text" id="eventName" name="event[name]">
-      </div>
-      <div class="form-group">
-        <label for="eventStartDate">開始日時：</label>
-        <input type="datetime-local" id="eventStartDate" name="event[start_date]">
-      </div>
-      <div class="form-group">
-        <label for="eventEndDate">終了日時：</label>
-        <input type="datetime-local" id="eventEndDate" name="event[end_date]">
-      </div>
-      <div class="form-group">
-        <label for="imageUpload">画像参照：</label>
-        <input type="file" id="imageUpload" name="photo[image]">
-      </div>
-      <button type="submit" id="registerModal">登録</button>
-      <button type="button" id="closeModal">閉じる</button>
-    </form>
-  </div>
-</div>
+<%= render "modal" %>
 
 
 <%= javascript_include_tag "register_event" %>
-<%= javascript_include_tag "event_dialog" %>
-
 
 
 <script defer

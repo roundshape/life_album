@@ -8,6 +8,11 @@
   margin: 0;
 } */
 
+.event_name {
+  font-size: 20px;
+  font-weight: bolder;
+}
+
 .image-container {
   display: flex; /* Flexboxを使用して画像を横並びにする */
   overflow-x: auto; /* 水平方向のスクロールバーを表示 */
