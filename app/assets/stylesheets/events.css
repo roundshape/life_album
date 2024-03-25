@@ -5,6 +5,29 @@
   text-align: center;
 }
 
+.navigation {
+  display: flex;
+  width: 985px;
+  background-color: lawngreen;
+}
+
+.left_nav_space {
+  width: 30px;
+}
+
+.nav_search {
+  font-size: 18px;
+  width: 100px;
+}
+
+.nav_search:hover {
+  background-color: yellow; /* マウスオーバー時に背景色を黄色にする */
+}
+
+.right_nav_space {
+  width: 30px;
+}
+
 .upper-container {
   display: flex;
   background-color: white;
@@ -83,7 +106,7 @@
 
 /* ===========地図関係 ========== */
 #map {
-  height: calc(100vh - 500px);
+  height: calc(100vh - 550px);
   width: calc(550px + 400px + 20px);
   margin-top: 10px;
 }
