@@ -11,4 +11,5 @@ Rails.application.routes.draw do
       get :display_locations, on: :collection
     end
   end
+  resources :search, only: [:index]
 end

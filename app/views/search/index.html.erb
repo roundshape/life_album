@@ -1,0 +1,99 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'search', media: 'all', 'data-turbolinks-track': 'reload' %>
+<% end %>
+
+<%= render "shared/header" %>
+
+<div class="center-container">
+  <div class="container">
+    <div class="search_condition">
+      <table>
+        <tr>
+          <td class="condition-first-row" colspan="2">
+            <input type="datetime-local" id="start_date" name="start_date">
+            <span>から</span>
+            <input type="datetime-local" id="end_date" name="end_date">
+            <span>イベント名：</span>
+            <input type="text" id="event_name" name="event_name">
+          <td>
+        </tr>
+        <tr>
+          <td class="condition-second-row">
+            <label for="prefecture">都道府県</label>
+            <select id="prefecture" name="prefecture">
+              <option value="apple">東京</option>
+            </select>
+          </td>
+          <td>
+            <select id="camera-make" name="camera-make">
+              <option value="apple">canon</option>
+            </select>
+          </td>
+          <td>
+            <select id="camera-model" name="model-make">
+              <option value="apple">eos5d</option>
+            </select>
+          </td>
+          <td>
+            <select id="lens-make" name="lens-make">
+              <option value="apple">canon</option>
+            </select>
+          </td>
+          <td>
+            <select id="lens-model" name="model-make">
+              <option value="apple">eos5d</option>
+            </select>
+          </td>
+          <td>
+            <button id="go_search">検索実行</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <table id="results" class="results">
+      <%# @search_results.each do |result| %>
+        <tr>
+          <td>
+          </td>
+        </tr>
+      <%# end %>
+    </table>
+
+    <div class="switch_operation">
+      <input type="radio" id="map_radio" name="selection" value="map">
+      <label for="map_radio">地図</label><br>
+      <input type="radio" id="photo_radio" name="selection" value="photo" checked>
+      <label for="photo_radio">Exif</label>
+    </div>
+    <div id="switch-display">
+      <!-- 地図表示 -->
+      <div id="map"></div>
+      <!-- 選択された写真の詳細表示領域 -->
+      <div id="photo">
+        <table id="photo-details">
+          <tr>
+            <td>
+              <div class="selected-image-box">
+                <img id="selected-photo" src="" alt="Selected photo" class="fit-image">
+              </div>
+            </td>
+            <td>
+              <div class="photo-details-mid-spacer"></div>
+            </td>
+            <td>
+              <div class="photo-exif-box">
+                <p id="photo-exif"></p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script defer
+    src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&loading=async&callback=initMap">
+</script>
+
+<%= javascript_include_tag "map" %>
