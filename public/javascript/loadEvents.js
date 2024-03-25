@@ -24,7 +24,11 @@ export function loadEvents(clickedDate) {
 
         // 新規タブで/events/:event_id/list_photosを開く
         const eventId = this.getAttribute('data-event-id');
-        window.open(`/events/${eventId}/list_photos`, '_blank');
+        // ウィンドウ名にイベントIDを使用してユニークにする
+        const windowName = `PhotosForEvent_${eventId}`;
+        console.log(windowName);
+        // 同じイベントIDの写真リストを表示するために同じウィンドウ名を使用する
+        window.open(`/events/${eventId}/list_photos`, windowName)
       });
     
       // <li>要素に「写真」ボタンを追加
