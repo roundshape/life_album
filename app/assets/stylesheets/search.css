@@ -1,3 +1,67 @@
+.search-condition {
+  margin-bottom: 10px;
+}
+
+.condition-table, .condition-table th, .condition-table td {
+  border: none; /* 罫線を消す */
+}
+
 .condition-first-row td {
+  white-space: nowrap;
+}
+
+.search_button button {
+  height: 50px;
+}
+
+.results-container {
+  width: 900px;
+  height: 600px;
+  border: 1px solid black;
+  overflow: auto; /* コンテンツがコンテナを超えた場合にスクロールバーを表示 */
+}
+
+.tbody-container {
+  height: 400px; /* ここで指定する高さによってスクロールが発生 */
+  overflow-y: auto;
+}
+
+/* thead内のth要素のスタイル指定 */
+table.results th {
+  position: sticky;
+  top: 0; /* テーブルのヘッダーを上部に固定 */
+  background-color: #aefdc1; /* スクロール時にコンテンツに隠れないように背景色を指定 */
+  padding: 10px 0; /* 上下のパディングで高さを調整 */
+  text-align: center; /* テキストを中央揃えに */
+}
+
+/* 各<th>要素に異なる幅を設定 */
+table.results th:nth-child(1) { width: 20%; } /* サムネイル */
+table.results th:nth-child(2) { width: 15%; } /* 撮影日 */
+table.results th:nth-child(3) { width: 20%; } /* イベント */
+table.results th:nth-child(4) { width: 15%; } /* カメラMaker */
+table.results th:nth-child(5) { width: 15%; } /* カメラModel */
+table.results th:nth-child(6) { width: 7.5%; } /* レンズMaker */
+table.results th:nth-child(7) { width: 7.5%; } /* レンズModel */
+
+/* 縦の罫線の表示 */
+table.results th, table.results td {
+  border-left: 1px solid #000; /* 左側に線を表示 */
+  border-right: 1px solid #000; /* 右側に線を表示 */
+}
+
+/* 最初の<th>と<td>要素の左側の線を削除 */
+table.results th:first-child, table.results td:first-child {
+  border-left: none;
+}
+
+/* 最後の<th>と<td>要素の右側の線を削除 */
+table.results th:last-child, table.results td:last-child {
+  border-right: none;
+}
+
+.results table, td {
+  border: 1px solid black;
+  text-align: center;
   white-space: nowrap;
 }

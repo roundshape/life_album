@@ -11,5 +11,12 @@ Rails.application.routes.draw do
       get :display_locations, on: :collection
     end
   end
-  resources :search, only: [:index]
+
+  # search コントローラーの index アクションは検索画面を表示します。
+  resources :search, only: [:index] do
+    # 検索を実行するカスタムアクション。collection を使っています。
+    collection do
+      post :execute_search
+    end
+  end
 end

@@ -67,20 +67,6 @@ const setupPhotoSelectionHandlers = function() {
       alert('位置情報がありません');
     }  
   });
-
-  // // ラジオボタン選択時のイベントハンドラ（写真）
-  // document.getElementById('photo_radio').addEventListener('change', function() {
-  //   if(this.checked) {
-  //     // ここに写真選択時のロジックを追加
-  //   }
-  // });
-
-  // // ラジオボタン選択時のイベントハンドラ（地図）
-  // document.getElementById('map_radio').addEventListener('change', function() {
-  //   if(this.checked) {
-  //     // ここに地図選択時のロジックを追加
-  //   }
-  // });
 };
 
 // Turbo Driveを使用している場合のページロードイベント

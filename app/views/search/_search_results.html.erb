@@ -1,0 +1,12 @@
+<!-- app/views/search/_search_results.html.erb -->
+<% photos.each do |photo| %>
+  <tr>
+    <td><img src="<%= photo.thumbnail %>" alt="Thumbnail"></td>
+    <td><%= DateTime.parse(photo.date_time).strftime('%Y-%m-%d') %></td>
+    <td><%= photo.event.name %></td>
+    <td><%= photo.make %></td>
+    <td><%= photo.model %></td>
+    <td><%= photo.lens_make %></td>
+    <td><%= photo.lens_model %></td>
+  </tr>
+<% end %>
