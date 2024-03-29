@@ -47,7 +47,7 @@
   #### ER図  
 ![alt text](life_album_er.png)
 ## 画面遷移図  
-![alt text](screems_doc.png)
+![alt text](screens_doc.png)
 ## 開発環境  
   使用した言語：Ruby on Rails  
   モジュール：simple＿calendar、Google MAP API、Exifr、Dropzonejs
