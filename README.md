@@ -40,16 +40,17 @@
 ## アプリケーションを作成した背景
   私が以前、カメラを趣味にしていて、カレンダーと地図とExif情報を表示でき、写真を管理するアプリが欲しいと思ったことがあったから。 
 
-  #### 実装予定の機能
-    検索機能(現在開発中)、編集、削除、ダウンロード、ユーザー管理等、スマホやタブレット端末への対応
+#### 実装予定の機能
+  検索機能(現在開発中)、編集、削除、ダウンロード、ユーザー管理等、スマホやタブレット端末への対応
 
 ## データベース設計
-#### ER図  
+  #### ER図  
 ![alt text](life_album_er.png)
 ## 画面遷移図  
+![alt text](screems_doc.png)
 ## 開発環境  
   使用した言語：Ruby on Rails  
-  モジュール：simple＿calendar、Google MAP API、Exifr  
+  モジュール：simple＿calendar、Google MAP API、Exifr、Dropzonejs
 ## ローカルでの動作方法  
   % git clone https://github.com/roundshape/life_album.git  
   % cd life_album  
