@@ -12,6 +12,12 @@
 
 .search_button button {
   height: 50px;
+  margin-left: 10px;
+}
+
+.reset_conditions_button button {
+  height: 50px;
+  margin-left: 10px;
 }
 
 .results-container {
@@ -64,4 +70,22 @@ table.results th:last-child, table.results td:last-child {
   border: 1px solid black;
   text-align: center;
   white-space: nowrap;
+}
+
+/* 選択された行のスタイル */
+.selected-row {
+  background-color: #f0f0f0; /* 軽いグレー色 */
+}
+
+.search-operations {
+  margin-top: 10px;
+  display: flex;
+}
+
+.space-operation {
+  width: 750px;
+}
+
+#reset-operation {
+  margin-left: 10px;
 }
