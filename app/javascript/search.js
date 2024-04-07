@@ -101,6 +101,11 @@ const reset_conditions_button = function() {
     document.getElementById("start_date").value = '';
     document.getElementById("end_date").value = '';
     document.getElementById("event_name").value = '';
+    // セレクトボックスの値をリセット（デフォルト値に設定）
+    document.getElementById("camera-make").selectedIndex = 0;
+    document.getElementById("camera-model").selectedIndex = 0;
+    document.getElementById("lens-make").selectedIndex = 0;
+    document.getElementById("lens-model").selectedIndex = 0;
   });
 };
 

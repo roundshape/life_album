@@ -10,7 +10,23 @@
   white-space: nowrap;
 }
 
-.search_button button {
+#camera-make {
+  width: 100%;
+}
+
+#camera-model {
+  width: 100%;
+}
+
+#lens-make {
+  width: 100%;
+}
+
+#lens-model {
+  width: 100%;
+}
+
+#search_button {
   height: 50px;
   margin-left: 10px;
 }

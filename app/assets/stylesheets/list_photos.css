@@ -100,6 +100,12 @@
   text-align: left;
 }
 
+#photo-exif li {
+  white-space: normal;
+  word-break: break-all; /* 長い単語でも強制的に折り返す */
+  overflow-wrap: anywhere;
+}
+
 #map {
   height: calc(100vh - 450px);
   width: calc(512px + 350px + 20px);

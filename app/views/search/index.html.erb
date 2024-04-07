@@ -7,47 +7,49 @@
 <div class="center-container">
   <div class="container">
     <div class="search-condition">
-      <form id="search-form" action="<%= execute_search_search_index_path %>" method="post">
+      <%= form_with id: 'search-form', url: execute_search_search_index_path, method: :post, local: false do |f| %>
         <table class="condition-table">
           <tr>
             <td class="condition-first-row" colspan="4">
-              <input type="date" id="start_date" name="start_date">
+              <%= f.date_field :start_date, id: 'start_date' %>
               <span>から</span>
-              <input type="date" id="end_date" name="end_date">
+              <%= f.date_field :end_date, id: 'end_date' %>
               <span>イベント名：</span>
-              <input type="text" id="event_name" name="event_name">
+              <%= f.text_field :event_name, id: 'event_name' %>
             <td>
-            <td class="search_button" rowspan="2">
-              <button type="submit" id="search_button">検索実行</button>
+            <td class="search_button" rowspan="3">
+              <%= f.submit '検索実行', id: 'search_button' %>
             </td>
-            <td class="reset_conditions_button" rowspan="2">
-              <button type="button" id="reset_conditions_button">リセット</button>
+            <td class="reset_conditions_button" rowspan="3">
+              <%= button_tag 'リセット', type: 'button', id: 'reset_conditions_button' %>
             </td>
           </tr>
           <tr>
             <td>
-              <select id="camera-make" name="camera-make">
-                <option value="apple">canon</option>
-              </select>
+               <%= f.select :camera_make, 
+                options_for_select([['-カメラメーカ-', 0]] + CameraMake.all.map { |camera_make| [camera_make.display_name, camera_make.id] }),
+                {}, { id: 'camera-make' } %>
             </td>
-            <td>
-              <select id="camera-model" name="camera-model">
-                <option value="apple">eos5d</option>
-              </select>
+            <td colspan="3">
+              <%= f.select :camera_model, 
+                options_for_select([['-カメラモデル-', 0]] + CameraModel.all.map { |camera_model| [camera_model.display_name, camera_model.id] }),
+                {}, { id: 'camera-model' } %>
             </td>
+          </tr>
+          <tr>
             <td>
-              <select id="lens-make" name="lens-make">
-                <option value="apple">sigma</option>
-              </select>
+              <%= f.select :lens_make, 
+                options_for_select([['-レンズメーカ-', 0]] + LensMake.all.map { |lens_make| [lens_make.display_name, lens_make.id] }),
+                {}, { id: 'lens-make' } %>
             </td>
-            <td>
-              <select id="lens-model" name="lens-model">
-                <option value="apple">50mmf1.5</option>
-              </select>
+            <td colspan="3">
+              <%= f.select :lens_model, 
+                options_for_select([['-レンズモデル-', 0]] + LensModel.all.map { |lens_model| [lens_model.display_name, lens_model.id] }),
+                {}, { id: 'lens-model' } %>
             </td>
           </tr>
         </table>
-      </form>
+      <% end %>
     </div>
     <div class="results-container">
       <table id="results" class="results">

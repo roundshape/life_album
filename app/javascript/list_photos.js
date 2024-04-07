@@ -27,13 +27,13 @@ const setupPhotoSelectionHandlers = function() {
       if (data.exif_json) {
         const exif = data.exif_json;
         document.getElementById('photo-exif').innerHTML = `
-                                                          メーカー: ${exif.make}<br>
-                                                          モデル: ${exif.model}<br>
-                                                          シャッタースピード: ${exif.shutter_speed_value}<br>
-                                                          撮影日時: ${exif.date_time}<br>
-                                                          レンズメーカー: ${exif.lens_make}<br>
-                                                          レンズモデル: ${exif.lens_model}<br>
-                                                          焦点距離: ${exif.focal_length}
+                                                          <li>メーカー: ${exif.camera_make}</li>
+                                                          <li>モデル: ${exif.camera_model}</li>
+                                                          <li>シャッタースピード: ${exif.shutter_speed}</li>
+                                                          <li>撮影日時: ${exif.date_time}</li>
+                                                          <li>レンズメーカー: ${exif.lens_make}</li>
+                                                          <li>レンズモデル: ${exif.lens_model}</li>
+                                                          <li>焦点距離: ${exif.focal_length}</li>
                                                           `;
       } else {
         document.getElementById('photo-exif').innerHTML = '';

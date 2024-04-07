@@ -13,12 +13,12 @@ class ListPhotosController < ApplicationController
     image_url = rails_blob_url(photo.image, only_path: true)
 
     exif_json = {
-      make: photo.make, # これらの属性はモデルに合わせて調整
-      model: photo.model,
-      shutter_speed_value: photo.shutter_speed_value,
+      camera_make: photo.camera_model.camera_make.camera_make_name,
+      camera_model: photo.camera_model.camera_model_name,
+      shutter_speed: photo.shutter_speed,
       date_time: photo.date_time,
-      lens_make: photo.lens_make,
-      lens_model: photo.lens_model,
+      lens_make: photo.lens_model.lens_make.lens_make_name,
+      lens_model: photo.lens_model.lens_model_name,
       focal_length: photo.focal_length,
       longitude: photo.longitude,
       latitude: photo.latitude
@@ -29,11 +29,21 @@ class ListPhotosController < ApplicationController
   def drop
     @event = Event.find(params[:event_id])
     uploaded_file = photo_params[:file] # ストロングパラメータを通してfileを取得
-    # ここでファイルの処理を行う
+
     exif_exists = false
     gps_latitude = nil
     gps_longitude = nil
+    exif_make = nil
+    exif_model = nil
+    exif_shutter_speed_value = nil
+    exif_date_time = nil
+    exif_lens_make = nil
+    exif_lens_model = nil
+    exif_focal_length = nil
+    exif_iso_speed_ratings = nil
+    exif_f_number = nil
     thumbnail_image = nil
+
     image_filename = uploaded_file.original_filename
     thumbnail_image = create_thumbnail_and_encode_base64(uploaded_file)
     directory_path = File.dirname(uploaded_file.tempfile)
@@ -42,6 +52,7 @@ class ListPhotosController < ApplicationController
     FileUtils.cp(uploaded_file.tempfile, workfile_path)
     exif_data = EXIFR::JPEG.new(workfile_path).exif
     FileUtils.rm(workfile_path)
+
     exif_exists = exif_data ? true : false
     if exif_exists
       if exif_data.gps_latitude
@@ -50,43 +61,81 @@ class ListPhotosController < ApplicationController
       if exif_data.gps_longitude
         gps_longitude = get_lat_lng_from_exif(exif_data.gps_longitude, exif_data.gps_longitude_ref)
       end
-
-      exif_make = nil
-      exif_model = nil
-      exif_shutter_speed_value = nil
-      exif_date_time = nil
-      exif_lens_make = nil
-      exif_lens_model = nil
-      exif_focal_length = nil
       if exif_data.make
-          exif_make = exif_data.make
+        exif_make = exif_data.make
       end
       if exif_data.model
-          exif_model = exif_data.model
+        exif_model = exif_data.model
       end
       if exif_data.shutter_speed_value
-          exif_shutter_speed_value = exif_data.shutter_speed_value
+        exif_shutter_speed_value = exif_data.shutter_speed_value
       end
       if exif_data.date_time
-          exif_date_time = exif_data.date_time
+        exif_date_time = exif_data.date_time
       end
       if exif_data.lens_make
-          exif_lens_make = exif_data.lens_make
+        exif_lens_make = exif_data.lens_make
       end
       if exif_data.lens_model
-          exif_lens_model = exif_data.lens_model
+        exif_lens_model = exif_data.lens_model
       end
       if exif_data.focal_length
-          exif_focal_length = exif_data.focal_length
+        exif_focal_length = exif_data.focal_length
+      end
+      if exif_data.iso_speed_ratings
+        exif_iso_speed_ratings = exif_data.iso_speed_ratings
+      end
+      if exif_data.f_number
+        exif_f_number = exif_data.f_number
       end
     end
+
+    if exif_make
+      camera_make = find_or_create_record(CameraMake, :camera_make_name, exif_make,
+        { camera_make_name: exif_make, display_name: exif_make, search_key: '%' + exif_make.gsub(" ", "%") + '%' }
+      )
+
+      # メソッドからnilが返された場合（エラーハンドリングにより）、以降の処理をスキップ
+      return unless camera_make
+    end
+
+    if exif_model
+      camera_model = find_or_create_record(CameraModel, :camera_model_name, exif_model,
+        { camera_model_name: exif_model, display_name: exif_model, search_key: '%' + exif_model.gsub(" ", "%") + '%', camera_make_id: camera_make&.id}
+      )
+
+      # メソッドからnilが返された場合（エラーハンドリングにより）、以降の処理をスキップ
+      return unless camera_model
+    end
+
+    if exif_lens_make
+      lens_make = find_or_create_record(LensMake, :lens_make_name, exif_lens_make,
+        { lens_make_name: exif_lens_make, display_name: exif_lens_make, search_key: '%' + exif_lens_make.gsub(" ", "%") + '%' }
+      )
+
+      # メソッドからnilが返された場合（エラーハンドリングにより）、以降の処理をスキップ
+      return unless lens_make
+    end
+
+    if exif_lens_model
+      lens_model = find_or_create_record(LensModel, :lens_model_name, exif_lens_model,
+        { lens_model_name: exif_lens_model, display_name: exif_lens_model, search_key: '%' + exif_lens_model.gsub(" ", "%") + '%', lens_make_id: lens_make&.id }
+      )
+
+      # メソッドからnilが返された場合（エラーハンドリングにより）、以降の処理をスキップ
+      return unless lens_model
+    end
+
+
+
     # Photo オブジェクトの作成
     photo = @event.photos.build(image: uploaded_file, filename: image_filename,
                                 latitude: gps_latitude, longitude: gps_longitude,
-                                make: exif_make, model: exif_model, shutter_speed_value: exif_shutter_speed_value,
-                                date_time: exif_date_time, lens_make: exif_lens_make, lens_model: exif_lens_model,
-                                focal_length: exif_focal_length,
-                                thumbnail: thumbnail_image)
+                                camera_model_id: camera_model&.id, lens_model_id: lens_model&.id,
+                                shutter_speed: exif_shutter_speed_value, focal_length: exif_focal_length,
+                                f_number: exif_f_number, iso_speed: exif_iso_speed_ratings,
+                                date_time: exif_date_time, thumbnail: thumbnail_image)
+                          
     if photo.save
       # 成功した場合の処理
       render json: { status: 'success' }, status: :ok
@@ -125,4 +174,22 @@ class ListPhotosController < ApplicationController
   def photo_params
     params.permit(:event_id, :file)
   end
+
+  def find_or_create_record(model_class, search_key_name, search_key_value, attributes = {})
+    # モデルクラスから検索キーに基づいてレコードを検索
+    record = model_class.find_by(search_key_name => search_key_value)
+
+    unless record
+      # レコードが存在しない場合、新しく作成
+      begin
+        record = model_class.create!(attributes)
+      rescue ActiveRecord::RecordInvalid => e
+        # レコードの作成に失敗した場合のエラーハンドリング
+        render json: { status: 'error', errors: e.message }, status: :unprocessable_entity
+        return nil
+      end
+    end
+    record
+  end
+
 end
