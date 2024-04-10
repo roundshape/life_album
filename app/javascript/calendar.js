@@ -27,7 +27,7 @@ const updateCalendar = function(event, direction, targetMonth = null) {
 // カレンダーナビゲーションの更新処理を分離
 function updateCalendarNavigation(data) {
   const timeElement = document.querySelector(".calendar-heading > time");
-  timeElement.setAttribute("datetime", `${data.currentYear}-${data.nextMonth.slice(5, 7)}`);
+  timeElement.setAttribute("datetime", data.currentMonth);
   timeElement.innerHTML = `${data.currentMonthName} ${data.currentYear}`;
 
   const nextMonthFormatted = new Date(data.nextMonth).toISOString().slice(0, 10);

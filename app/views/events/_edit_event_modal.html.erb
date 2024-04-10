@@ -1,0 +1,33 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'edit_event_modal_dialog', media: 'all' %>
+<% end %>
+
+<div id="edit_event_modal" class="edit_event_modal">
+  <div class="edit-event-modal-content">
+    <span class="edit-event-close-button">×</span>
+    <h3>予定の編集</h3>
+    <form id="editEventForm" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="edit-event-form-group">
+        <label for="editEventName">イベント名：</label>
+        <input type="text" id="editEventName" name="event[name]">
+      </div>
+      <div class="edit-event-form-group">
+        <label for="editEventStartDate">開始日時：</label>
+        <input type="datetime-local" id="editEventStartDate" name="event[start_date]">
+      </div>
+      <div class="edit-event-form-group">
+        <label for="editEventEndDate">終了日時：</label>
+        <input type="datetime-local" id="editEventEndDate" name="event[end_date]">
+      </div>
+      <div class="executeButton">
+        <button type="submit" id="updateEvent">更新</button>
+        <button type="button" id="deleteEvent">削除</button>
+      </div>
+      <button type="button" id="closeEditEventModal">閉じる</button>
+    </form>
+  </div>
+</div>
+
+<%= javascript_include_tag "edit_event_dialog" %>
+<%= javascript_include_tag "updateEventList" %>

@@ -12,7 +12,9 @@ $(document).ready(function() {
     const formattedDate = displayDate.toLocaleDateString('ja-JP', options);
 
     // タイトルに日付を設定
-    document.querySelector('.list-container .title').textContent = `${formattedDate}`;
+    const titleElement = document.querySelector('.list-container .title');
+    titleElement.textContent = `${formattedDate}`;
+    titleElement.setAttribute('data-date', clickedDate); // ここで日付を保存
 
     // Ajaxリクエストを送信
     loadEvents(clickedDate); 

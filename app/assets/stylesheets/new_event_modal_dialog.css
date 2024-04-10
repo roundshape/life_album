@@ -1,0 +1,88 @@
+/* ===========ダイヤログ関係 ========== */
+h3 {
+  font-size: 1.5em; /* 例: フォントサイズを大きくする */
+  margin: 0.5em 0; /* 例: 上下のマージンを設定 */
+  font-weight: bold; /* 例: 太字にする */
+}
+
+.new_event_modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  right: 0;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.new-event-modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+.new-event-close-button {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#closeNewEventModal {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#registerEvent {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#closeNewEventModal:hover,
+#closeNewEventModal:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#registerEvent:hover,
+#registerEvent:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* 各入力項目の間隔を調整 */
+.new-event-form-group {
+  margin-bottom: 10px; /* 下部のマージンを10pxに設定 */
+}
+
+/* 特定の入力エリア（予定）を広げる */
+#newEventName {
+  width: 100%; /* 入力エリアの幅をコンテナの100%に設定 */
+  box-sizing: border-box; /* パディングとボーダーを幅に含めるための設定 */
+}
+
+/* フォーム全体のスタイリングを微調整する場合は、以下のように追加 */
+#newEventForm {
+  display: flex;
+  flex-direction: column;
+}
+
+/* フォーム内のボタンのスタイルを調整 */
+#newEventForm button {
+  margin-top: 10px; /* ボタン間、またはボタンと他の要素との間隔 */
+}
+
+/* 予定のラベルと入力エリアのスタイルを調整する場合 */
+.new-event-form-group label {
+  display: block; /* ラベルをブロック要素にして下に入力エリアが来るように */
+  margin-bottom: 5px; /* ラベルと入力エリアの間のマージン */
+}

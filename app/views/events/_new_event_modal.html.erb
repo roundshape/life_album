@@ -1,0 +1,29 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'new_event_modal_dialog', media: 'all' %>
+<% end %>
+
+<div id="new_event_modal" class="new_event_modal">
+  <div class="new-event-modal-content">
+    <span class="new-event-close-button">×</span>
+    <h3>予定の登録</h3>
+    <form id="newEventForm" action="<%= events_path %>" method="post">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <div class="new-event-form-group">
+        <label for="newEventName">イベント名：</label>
+        <input type="text" id="newEventName" name="event[name]">
+      </div>
+      <div class="new-event-form-group">
+        <label for="newEventStartDate">開始日時：</label>
+        <input type="datetime-local" id="newEventStartDate" name="event[start_date]">
+      </div>
+      <div class="new-event-form-group">
+        <label for="newEventEndDate">終了日時：</label>
+        <input type="datetime-local" id="newEventEndDate" name="event[end_date]">
+      </div>
+      <button type="submit" id="registerEvent">登録</button>
+      <button type="button" id="closeNewEventModal">閉じる</button>
+    </form>
+  </div>
+</div>
+
+<%= javascript_include_tag "new_event_dialog" %>

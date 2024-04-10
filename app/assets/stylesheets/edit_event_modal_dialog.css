@@ -5,7 +5,7 @@ h3 {
   font-weight: bold; /* 例: 太字にする */
 }
 
-.modal {
+.edit_event_modal {
   display: none;
   position: fixed;
   z-index: 1;
@@ -18,7 +18,7 @@ h3 {
   background-color: rgba(0,0,0,0.4);
 }
 
-.modal-content {
+.edit-event-modal-content {
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
@@ -26,33 +26,47 @@ h3 {
   width: 80%;
 }
 
-.close-button {
+.edit-event-close-button {
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#closeModal {
+.executeButton {
+  display: flex;
+}
+
+#updateEvent {
+  width: 50%;
+  margin-right: 5px;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#registerModal {
+#deleteEvent {
+  width: 50%;
+  margin-left: 5px;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-#closeModal:hover,
-#closeModal:focus {
+#closeEditEventModal {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+#closeEditEventModal:hover,
+#closeEditEventModal:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
 
-#registerModal:hover,
-#registerModal:focus {
+#updateEvent:hover,
+#updateEvent:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
@@ -60,29 +74,29 @@ h3 {
 
 
 /* 各入力項目の間隔を調整 */
-.form-group {
+.edit-event-form-group {
   margin-bottom: 10px; /* 下部のマージンを10pxに設定 */
 }
 
 /* 特定の入力エリア（予定）を広げる */
-#eventName {
+#editEventName {
   width: 100%; /* 入力エリアの幅をコンテナの100%に設定 */
   box-sizing: border-box; /* パディングとボーダーを幅に含めるための設定 */
 }
 
 /* フォーム全体のスタイリングを微調整する場合は、以下のように追加 */
-#eventForm {
+#editEventForm {
   display: flex;
   flex-direction: column;
 }
 
 /* フォーム内のボタンのスタイルを調整 */
-#eventForm button {
+#editEventForm button {
   margin-top: 10px; /* ボタン間、またはボタンと他の要素との間隔 */
 }
 
 /* 予定のラベルと入力エリアのスタイルを調整する場合 */
-label {
+.edit-event-form-group label {
   display: block; /* ラベルをブロック要素にして下に入力エリアが来るように */
   margin-bottom: 5px; /* ラベルと入力エリアの間のマージン */
 }

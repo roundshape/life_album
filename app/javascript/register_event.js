@@ -1,13 +1,13 @@
 // モーダル表示と非表示の関数
-const toggleModal = (displayStyle) => {
-  document.getElementById("modal").style.display = displayStyle;
+const toggleNewEventModal = (displayStyle) => {
+  document.getElementById("new_event_modal").style.display = displayStyle;
 };
 
-const setupEventHandlers = () => {
-  document.getElementById("openModal").addEventListener('click', () => toggleModal("block"));
-  document.getElementsByClassName("close-button")[0].addEventListener('click', () => toggleModal("none"));
-  document.getElementById("closeModal").addEventListener('click', () => toggleModal("none"));
+const setupNewEventEventHandlers = () => {
+  document.getElementById("openRegisterModal").addEventListener('click', () => toggleNewEventModal("block"));
+  document.getElementsByClassName("new-event-close-button")[0].addEventListener('click', () => toggleNewEventModal("none"));
+  document.getElementById("closeNewEventModal").addEventListener('click', () => toggleNewEventModal("none"));
 };
 
 // Turbo Drive関連のイベントに対応する
-document.addEventListener("turbo:load", setupEventHandlers);
+document.addEventListener("turbo:load", setupNewEventEventHandlers);

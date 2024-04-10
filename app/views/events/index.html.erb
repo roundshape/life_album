@@ -25,14 +25,15 @@
 
     <!-- ここにイベント一覧が来ます -->
     <div class="list-container">
+      <div class="list-operation">
+        <button type="submit" id="openRegisterModal">登録</button>
+        <button type="submit" id="openEditModal">編集</button>
+        <button type="submit" id="photoButton">写真</button>
+        <button type="submit" id="mapButton">マップ</button>
+      </div>
+      <hr>
       <div class="list-title">
         <div class="title">クリックした日付</div>
-      </div>
-      <div class="list-operation">
-        <button type="submit" id="openModal">登録</button>
-        <button type="submit" id="openEditModal">編集</button>
-        <button type="submit" id="openModal">写真</button>
-        <button type="submit" id="openModal">マップ</button>
       </div>
       <hr>
       <!-- ここにから一覧が来ます -->
@@ -47,11 +48,15 @@
 </div>
 
 
-<!-- モーダルダイアログ -->
-<%= render "modal" %>
+<!-- 新規モーダルダイアログ -->
+<%= render "new_event_modal" %>
+<%= render "edit_event_modal" %>
 
 
 <%= javascript_include_tag "register_event" %>
+<%= javascript_include_tag "edit_event" %>
+<%= javascript_include_tag "photo_button" %>
+<%= javascript_include_tag "map_button" %>
 
 
 <script defer

@@ -1,4 +1,4 @@
-export function loadEvents(clickedDate) {
+function updateEventList(clickedDate) {
   fetch(`/events/date_events?date=${clickedDate}`)
   .then(response => response.json())
   .then(data => {

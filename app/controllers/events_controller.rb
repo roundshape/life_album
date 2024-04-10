@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   include CommonMethods
+  before_action :set_event_for_destroy, only: [:destroy]
   
   def index
     @month = params[:month] ? Date.parse(params[:month]) : Date.today
@@ -37,7 +38,8 @@ class EventsController < ApplicationController
           nextMonth: @next_month.strftime('%Y-%m-01'),
           previousMonth: @previous_month.strftime('%Y-%m-01'),
           currentYear: @month.year,
-          currentMonthName: t('date.month_names')[@month.month]
+          currentMonthName: t('date.month_names')[@month.month],
+          currentMonth: @month.strftime('%Y-%m') #表示中の月
         }
       }
     end
@@ -63,7 +65,39 @@ class EventsController < ApplicationController
         render json: { status: 'success', redirect_to: root_path }, status: :ok and return
     else
       render json: { status: 'error', errors: @event.errors.full_messages }, status: :unprocessable_entity
-    end    
+    end
+  end
+
+  def update
+    @event = Event.find(params[:id]) # 特定のイベントを検索
+    if @event.update(event_params) # イベントを更新
+      # 更新が成功した場合のレスポンス
+      render json: { status: 'success', redirect_to: root_path }, status: :ok
+    else
+      # 更新が失敗した場合のレスポンス
+      render json: { status: 'error', errors: @event.errors.full_messages }, status: :unprocessable_entity
+    end
+  end
+
+  def photos_count
+    # 指定されたイベントを見つける
+    event = Event.find(params[:id])
+
+    # イベントに紐付いた写真の件数を取得
+    photos_count = event.photos.count
+
+    # 写真の件数をJSON形式で返す
+    render json: { photosCount: photos_count }
+  rescue ActiveRecord::RecordNotFound
+    # イベントが見つからない場合のエラーハンドリング
+    render json: { error: 'Event not found' }, status: :not_found
+  end
+
+  def destroy
+    @event.destroy
+    respond_to do |format|
+      format.json { render json: { status: 'success' }, status: :ok }
+    end
   end
   
   private
@@ -76,5 +110,15 @@ class EventsController < ApplicationController
     start_date = month.beginning_of_month.beginning_of_day
     end_date = month.end_of_month.end_of_day
     Event.where('start_date <= ? AND end_date >= ?', end_date, start_date)
+  end
+
+  def set_event_for_destroy
+    @event = Event.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    # イベントが見つからない場合の処理
+    respond_to do |format|
+      format.html { redirect_to events_url, alert: 'Event not found.' }
+      format.json { render json: { error: 'Event not found' }, status: :not_found }
+    end
   end
 end

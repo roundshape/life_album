@@ -60,14 +60,6 @@
   width: 100%; /* 必要に応じて調整 */
 }
 
-.calendar-container .event-icon {
-  /* 必要に応じてスタイルを追加 */
-}
-
-.calendar-container .event-count {
-  /* イベント数表示のスタイル */
-}
-
 .simple-calendar .day {
   height: 60px !important;
 }
@@ -84,9 +76,9 @@
   display: flex;
 }
 
-.selected-day {
+/* .selected-day {
   margin-left: 10px;
-}
+} */
 
 .list-container ul {
   list-style-type: none; /* リストのスタイルを無しに設定 */
@@ -101,6 +93,10 @@
 
 .list-container ul li:last-child {
   border-bottom: none; /* 最後のリストアイテムの下線を消去 */
+}
+
+.selected-event {
+  background-color: lightblue; /* 選択されたイベントの背景色 */
 }
 
 
