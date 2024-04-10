@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       get :reload_image_container, on: :collection
       get :display_locations, on: :collection
     end
+    # eventsリソース内にphotosリソースをネストし、destroyアクションを追加
+    resources :photos, only: [:destroy]
   end
 
   # search コントローラーの index アクションは検索画面を表示します。

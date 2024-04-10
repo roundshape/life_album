@@ -13,13 +13,15 @@ class ListPhotosController < ApplicationController
     image_url = rails_blob_url(photo.image, only_path: true)
 
     exif_json = {
+      filename: photo.filename,
+      date_time: photo.date_time,
       camera_make: photo.camera_model.camera_make.camera_make_name,
       camera_model: photo.camera_model.camera_model_name,
-      shutter_speed: photo.shutter_speed,
-      date_time: photo.date_time,
       lens_make: photo.lens_model.lens_make.lens_make_name,
       lens_model: photo.lens_model.lens_model_name,
       focal_length: photo.focal_length,
+      shutter_speed: photo.shutter_speed,
+      iso_speed: photo.iso_speed,
       longitude: photo.longitude,
       latitude: photo.latitude
     }

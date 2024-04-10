@@ -15,12 +15,11 @@
       <% end %>
     </div>
     <div class="operations">
-      <input type="radio" id="map_radio" name="selection" value="map">
-      <label for="map_radio">地図</label><br>
-      <input type="radio" id="photo_radio" name="selection" value="photo" checked>
-      <label for="photo_radio">写真</label>
+      <button id="map_button" type="button" data-event-id="<%= @event.id %>">マップ</button>
+      <button id="info_button" type="button" data-event-id="<%= @event.id %>">詳細</button>
       <button id="reload-ImageContainer" data-reload-url="<%= reload_image_container_event_list_photos_path(event_id: @event.id) %>">再描</button>
       <button id="cancelUpload">アップロード停止</button>
+      <button id="delete_button" type="button" data-event-id="<%= @event.id %>">削除</button>
     </div>
 
     <div id="switch-display">
@@ -58,3 +57,6 @@
 <%= javascript_include_tag "map" %>
 <%= javascript_include_tag "dropzone" %>
 <%= javascript_include_tag "upload" %>
+<%= javascript_include_tag "map_button_for_list_photos" %>
+<%= javascript_include_tag "info_button_for_list_photos" %>
+<%= javascript_include_tag "delete_button_for_list_photos" %>

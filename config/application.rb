@@ -17,6 +17,9 @@ module LifeAlbum
     # Active Recordが使用するタイムゾーンを:localに設定
     config.active_record.default_timezone = :local
 
+    # simple_calendar, 日曜始まり
+    config.beginning_of_week = :sunday
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

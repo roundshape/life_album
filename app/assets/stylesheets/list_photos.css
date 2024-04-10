@@ -60,12 +60,8 @@
   justify-content: center; /* 中央寄せ */
 }
 
-.operations label {
-  margin-right: 20px; /* 最後のラベル以外、右側にスペースを追加 */
-}
-
-.operations input[type="radio"] {
-  margin-right: 5px; /* ラジオボタンとラベルの間に少しスペースを追加 */
+.operations button:not(:last-child) {
+  margin-right: 20px; /* 右側の間隔 */
 }
 
 #photo-details {
@@ -98,6 +94,10 @@
   width: 350px;
   border: 1px solid black;
   text-align: left;
+}
+
+#photo-exif {
+  padding: 5px 5px 5px 5px;
 }
 
 #photo-exif li {
