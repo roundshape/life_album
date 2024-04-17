@@ -1,7 +1,7 @@
 // モーダル表示と非表示の関数
 const toggleEditEventModal = (displayStyle) => {
   const selectedEvent = document.querySelector('.selected-event');
-  if (!selectedEvent) {
+  if (displayStyle === "block" && !selectedEvent) {
     alert('イベントを選択してください');
     return;
   }

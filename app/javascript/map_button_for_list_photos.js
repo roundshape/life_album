@@ -16,6 +16,7 @@ const setupMapButtonHandlers = function() {
     document.getElementById('photo').style.display = 'none';
   
     const eventId = document.querySelector('.image-container').getAttribute('data-event-id');
+    const bounds = new google.maps.LatLngBounds(); // 地図の表示範囲を調整するためのboundsオブジェクト
 
     for (let photoId of selectedPhotoIds) {
       try {
@@ -34,14 +35,15 @@ const setupMapButtonHandlers = function() {
             map: window.map,
           });
           markers.push(marker);
-          
-          if (photoId === selectedPhotoIds[0]) {
-            window.map.setCenter(photoLocation);
-          }
+          bounds.extend(marker.getPosition()); // マーカーの位置をboundsに追加
         }
       } catch (error) {
         console.error('Error fetching photo details:', error);
       }
+    }
+
+    if (!bounds.isEmpty()) {
+      window.map.fitBounds(bounds); // boundsに基づいて地図の表示範囲を調整
     }
   });
 };

@@ -13,26 +13,30 @@ const setupInfoButtonHandlers = function() {
     const eventId = document.querySelector('.image-container').getAttribute('data-event-id');
     const photoId = selectedPhotoIds[0]; // 選択された1つの写真IDを取得
 
-    try {
-      const response = await fetch(`/events/${eventId}/list_photos/${photoId}/details`);
-      const data = await response.json();
-
-      // 写真の画像URLを更新
-      document.getElementById('selected-photo').src = data.image_url;
-
-      // EXIF情報を表示
-      const exifList = document.getElementById('photo-exif');
-      exifList.innerHTML = ''; // 既存のリストをクリア
-      Object.entries(data.exif_json).forEach(([key, value]) => {
-        let item = document.createElement('li');
-        item.textContent = `${key}: ${value}`;
-        exifList.appendChild(item);
-      });
-    } catch (error) {
-      console.error('Error fetching photo details:', error);
-    }
-
+    // 写真の詳細情報を取得して表示する
+    await fetchAndDisplayPhotoDetails(eventId, photoId);
   });
+};
+
+async function fetchAndDisplayPhotoDetails(eventId, photoId) {
+  try {
+    const response = await fetch(`/events/${eventId}/list_photos/${photoId}/details`);
+    const data = await response.json();
+
+    // 写真の画像URLを更新
+    document.getElementById('selected-photo').src = data.image_url;
+
+    // EXIF情報を表示
+    const exifList = document.getElementById('photo-exif');
+    exifList.innerHTML = ''; // 既存のリストをクリア
+    Object.entries(data.exif_json).forEach(([key, value]) => {
+      let item = document.createElement('li');
+      item.textContent = `${key}: ${value}`;
+      exifList.appendChild(item);
+    });
+  } catch (error) {
+    console.error('Error fetching photo details:', error);
+  }
 };
 
 // Turbo Driveを使用している場合のページロードイベント

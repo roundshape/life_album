@@ -5,7 +5,6 @@ const setupPhotoSelectionHandlers = function() {
   document.getElementById('myDropzone').addEventListener('click', function(event) {
     const box = event.target.closest('.image-box');
     if (!box) return;
-
     const photoId = box.getAttribute('data-photo-id');
 
     // 選択状態を切り替え
@@ -25,9 +24,17 @@ document.addEventListener("turbo:load", setupPhotoSelectionHandlers);
 const reloadImageContainer = function() {
   const reloadImageContainerElement = document.getElementById('reload-ImageContainer');
   const reloadImageContainerUrl = reloadImageContainerElement.getAttribute('data-reload-url');
-  reloadImageContainerElement.addEventListener('click', function() {
+  reloadImageContainerElement.addEventListener('click', async function(event) {
+    // myDropzone内のすべてのimage-boxからhighlightクラスをクリア
+    const allImageBoxes = document.querySelectorAll('#myDropzone .image-box');
+    allImageBoxes.forEach(box => {
+      box.classList.remove('highlight');
+    });
+     //選択された写真のIDを保持するSetオブジェクトをリセット
+    selectedPhotos.clear();
+
     // URLを使用して画像をリロードする関数を呼び出す
-    reloadImages(reloadImageContainerUrl);
+    await reloadImages(reloadImageContainerUrl);
   });
 };
 

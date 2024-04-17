@@ -15,3 +15,7 @@
  *= require reset
  *= require simple_calendar
  */
+
+bhtml, body {
+  height: 100vh;
+}

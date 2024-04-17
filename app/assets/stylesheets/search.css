@@ -38,7 +38,7 @@
 
 .results-container {
   width: 900px;
-  height: 600px;
+  height: 700px;
   border: 1px solid black;
   overflow: auto; /* コンテンツがコンテナを超えた場合にスクロールバーを表示 */
 }

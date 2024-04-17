@@ -1,4 +1,4 @@
-const updateCalendar = function(event, direction, targetMonth = null) {
+const updateCalendar = async function(event, direction, targetMonth = null) {
   if (event) event.preventDefault();
   var month;
 
@@ -15,14 +15,18 @@ const updateCalendar = function(event, direction, targetMonth = null) {
     url += `&direction=${direction}`;
   }
 
-  fetch(url)
+  await fetch_calendar(url);
+};
+
+async function fetch_calendar(url) {
+  await fetch(url)
     .then(response => response.json())
     .then(data => {
       document.getElementById("calendar").innerHTML = data.calendarHtml;
       // <time> 要素とナビゲーションボタンの更新処理をここに追加
       updateCalendarNavigation(data);
     });
-};
+}
 
 // カレンダーナビゲーションの更新処理を分離
 function updateCalendarNavigation(data) {
@@ -42,8 +46,8 @@ const calendarNavigationHandler = function() {
   ["next-month", "previous-month", "today"].forEach(id => {
     const element = document.getElementById(id);
     if (element) {
-      element.addEventListener("click", function(event) {
-        updateCalendar(event, id);
+      element.addEventListener("click", async function(event) {
+        await updateCalendar(event, id);
       });
     }
   });

@@ -1,27 +1,33 @@
 const search_form = function() {
-  document.getElementById("search-form").addEventListener("submit", function(e) {
+  document.getElementById("search-form").addEventListener("submit", async function(e) {
     e.preventDefault(); // フォームのデフォルト送信を防止
 
     const url = this.action; // フォームのaction属性からURLを取得
     const formData = new FormData(this); // フォームのデータをFormDataオブジェクトとして取得
+    const csrfToken = document.querySelector("[name='csrf-token']").getAttribute("content"); // CSRFトークンを<meta>タグから取得
 
-    // CSRFトークンを<meta>タグから取得
-    const csrfToken = document.querySelector("[name='csrf-token']").getAttribute("content");
+    await submitSearchForm(url, formData, csrfToken); // 非同期関数を呼び出し
+  });
+};
 
-    fetch(url, {
+async function submitSearchForm(url, formData, csrfToken) {
+  try {
+    const response = await fetch(url, {
       method: 'POST',
       body: formData,
       headers: {
-        'X-Requested-With': 'XMLHttpRequest', // Ajaxリクエストであることを示す
-        'X-CSRF-Token': csrfToken // CSRFトークンをヘッダーに追加
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRF-Token': csrfToken
       },
-    })
-    .then(response => response.text()) // レスポンスをテキストとして解析
-    .then(html => {
-      document.getElementById("search-results").innerHTML = html; // 解析したHTMLをDOMに挿入
-    })
-    .catch(error => console.error('Error:', error));
-  });
+    });
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const html = await response.text();
+    document.getElementById("search-results").innerHTML = html;
+  } catch (error) {
+    console.error('Error:', error);
+  }
 };
 
 document.addEventListener("turbo:load", search_form);
