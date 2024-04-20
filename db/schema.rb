@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_06_100627) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_06_100629) do
   create_table "active_storage_attachments", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -91,8 +91,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_06_100627) do
     t.string "filename", null: false
     t.decimal "latitude", precision: 15, scale: 10
     t.decimal "longitude", precision: 15, scale: 10
-    t.text "camera_model_id"
-    t.text "lens_model_id"
+    t.bigint "camera_model_id"
+    t.bigint "lens_model_id"
     t.text "shutter_speed"
     t.text "focal_length"
     t.text "f_number"
@@ -102,12 +102,16 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_06_100627) do
     t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["camera_model_id"], name: "index_photos_on_camera_model_id"
     t.index ["event_id"], name: "index_photos_on_event_id"
+    t.index ["lens_model_id"], name: "index_photos_on_lens_model_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "camera_models", "camera_makes"
   add_foreign_key "lens_models", "lens_makes"
+  add_foreign_key "photos", "camera_models"
   add_foreign_key "photos", "events"
+  add_foreign_key "photos", "lens_models"
 end

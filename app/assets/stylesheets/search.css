@@ -1,3 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .search-condition {
   margin-bottom: 10px;
 }
@@ -38,7 +51,7 @@
 
 .results-container {
   width: 900px;
-  height: 700px;
+  height: 75vh;
   border: 1px solid black;
   overflow: auto; /* コンテンツがコンテナを超えた場合にスクロールバーを表示 */
 }
@@ -104,4 +117,8 @@ table.results th:last-child, table.results td:last-child {
 
 #reset-operation {
   margin-left: 10px;
+}
+
+#search-results tr {
+  cursor: pointer;
 }

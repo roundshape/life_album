@@ -1,12 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .center-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-/* .container {
-  margin: 0;
-} */
 
 .event_name {
   font-size: 20px;
@@ -41,8 +44,24 @@
 }
 
 /* Dropzoneの指定 */
+.dropzone {
+  background-image: url('/images/dropjpegfile.png');
+  background-size: cover; /* 画像がDropzoneの全体を覆うように調整 */
+  background-position: center; /* 画像が中央に配置されるように */
+}
+
 .dropzone .dz-preview .dz-image {
   border-radius: 0 !important;
+}
+
+.dz-error-message {
+  max-width: 100%; /* コンテナの最大幅を設定 */
+  padding: 10px; /* パディングを追加してテキストが読みやすくなるように */
+  white-space: normal; /* テキストが折り返し可能に */
+  text-align: center; /* テキストを中央揃えに */
+  overflow: hidden; /* はみ出したテキストを隠す */
+  word-wrap: break-word; /* 長い単語でも適切に折り返す */
+  color: white !important; /* 背景色を透明に設定 */
 }
 
 

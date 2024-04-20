@@ -21,6 +21,7 @@ class ListPhotosController < ApplicationController
       lens_model: photo.lens_model.lens_model_name,
       focal_length: photo.focal_length,
       shutter_speed: photo.shutter_speed,
+      f_number: photo.f_number,
       iso_speed: photo.iso_speed,
       longitude: photo.longitude,
       latitude: photo.latitude

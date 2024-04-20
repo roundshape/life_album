@@ -64,6 +64,11 @@
   height: 60px !important;
 }
 
+.event-icon {
+  cursor: pointer;
+}
+
+
 /* ===========イベント一覧関係 ========== */
 .list-container {
   width: 400px; /* list-containerの幅を250pxに設定 */
@@ -89,6 +94,7 @@
   border-bottom: 1px solid #ccc; /* 各リストアイテムの下に薄いグレーの罫線を設定 */
   padding: 8px 0; /* リストアイテムの上下にパディングを設定 */
   text-align: left;
+  cursor: pointer;
 }
 
 .list-container ul li:last-child {

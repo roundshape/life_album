@@ -1,5 +1,5 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'dropzone', 'basic', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'dropzone', 'basic', 'list_photos', media: 'all', 'data-turbolinks-track': 'reload' %>
 <% end %>
 
 <%= render "shared/header" %>
@@ -56,6 +56,12 @@
 <%= javascript_include_tag "list_photos" %>
 <%= javascript_include_tag "map" %>
 <%= javascript_include_tag "dropzone" %>
+<script>
+  // Dropzoneの設定
+  Dropzone.options.myDropzone = {
+    acceptedFiles: 'image/jpeg', // JPEGファイルのみ許可
+  };
+</script>
 <%= javascript_include_tag "upload" %>
 <%= javascript_include_tag "map_button_for_list_photos" %>
 <%= javascript_include_tag "info_button_for_list_photos" %>
